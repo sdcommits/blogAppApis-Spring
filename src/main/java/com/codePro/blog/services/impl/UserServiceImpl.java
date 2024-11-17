@@ -3,6 +3,7 @@ package com.codePro.blog.services.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserRepo userRepo;
+	
+	@Autowired
+	private ModelMapper modelMapper;
 
 	@Override
 	public UserDto createUser(UserDto userDto) {
@@ -59,24 +63,39 @@ public class UserServiceImpl implements UserService {
 
 	}
 	
+	//-----------------------making class object from another class by normal method
+	
+//	private User dtoToUser(UserDto userDto) { 
+//		User user = new User();
+//		user.setId(userDto.getId());
+//		user.setName(userDto.getName());
+//		user.setEmail(userDto.getEmail());
+//		user.setAbout(userDto.getAbout());
+//		user.setPassword(userDto.getPassword());
+//		return user;	
+//	}
+	
+	//---------------------making class object from another class by modelmapper 
+	
 	private User dtoToUser(UserDto userDto) { 
-		User user = new User();
-		user.setId(userDto.getId());
-		user.setName(userDto.getName());
-		user.setEmail(userDto.getEmail());
-		user.setAbout(userDto.getAbout());
-		user.setPassword(userDto.getPassword());
+		User user = this.modelMapper.map(userDto, User.class);
 		return user;	
 	}
 	
+//	public UserDto userToDto(User user) {
+//		UserDto userDto=new UserDto();  
+//		userDto.setId(user.getId());
+//		userDto.setEmail(user.getName());
+//		userDto.setPassword(user.getEmail());
+//		userDto.setAbout(user.getAbout());
+//		userDto.setPassword(user.getPassword());
+//		return userDto;	
+//		
+//	}
+	
 	public UserDto userToDto(User user) {
-		UserDto userDto=new UserDto();  
-		userDto.setId(user.getId());
-		userDto.setEmail(user.getName());
-		userDto.setPassword(user.getEmail());
-		userDto.setAbout(user.getAbout());
-		userDto.setPassword(user.getPassword());
-		return userDto;	
+		UserDto userDto = this.modelMapper.map(user, UserDto.class);
+		return userDto;
 		
 	}
 
