@@ -1,9 +1,8 @@
 package com.codePro.blog.payloads;
 
-import lombok.Data;
-import lombok.Getter;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 //@Data
 //@Getter
@@ -12,9 +11,17 @@ import lombok.Setter;
 public class UserDto {
 	
 	private int id;
+	
+	@NotNull
 	private String name;
+	
+	@Email
 	private String email;
+	
+	@NotNull
 	private String about;
+	
+	@NotNull
 	private String password;
  	public int getId() {
 		return id;
