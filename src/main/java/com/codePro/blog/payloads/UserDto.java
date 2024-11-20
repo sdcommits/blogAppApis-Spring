@@ -1,7 +1,9 @@
 package com.codePro.blog.payloads;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.NoArgsConstructor;
 
 //@Data
@@ -12,16 +14,18 @@ public class UserDto {
 	
 	private int id;
 	
-	@NotNull
+	@NotEmpty
+	@Size(min = 2, message = " username should have atleast 2 characters")
 	private String name;
 	
-	@Email
+	@Email(message = "user email should have be valid")
 	private String email;
 	
-	@NotNull
+	@NotEmpty
 	private String about;
 	
-	@NotNull
+	@NotEmpty
+	@Size(min = 3 , max = 10, message = "User should fill password in between 3-10 characters")
 	private String password;
  	public int getId() {
 		return id;
