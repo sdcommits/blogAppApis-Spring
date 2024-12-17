@@ -1,5 +1,7 @@
 package com.codePro.blog.payloads;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
@@ -25,7 +27,12 @@ public class CategoryDto {
 	public void setCategoryDescription(String categoryDescription) {
 		this.categoryDescription = categoryDescription;
 	}
+	
+	@NotBlank
+	@Size(min = 4)
 	private String categoryTitle;
+	@NotBlank
+	@Size(min = 10)
 	private String categoryDescription;
 	@Override
 	public String toString() {
