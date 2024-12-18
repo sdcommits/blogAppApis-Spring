@@ -1,8 +1,13 @@
 package com.codePro.blog.entities;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 
 //import org.hibernate.annotations.Table;
 
@@ -10,6 +15,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -85,10 +91,14 @@ public class User {
 		this.about = about;
 		this.password = password;
 	}
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Post> posts = new ArrayList<>();
 
 	public User() {
 		super();
 	}
+	
 	
 	
 }
